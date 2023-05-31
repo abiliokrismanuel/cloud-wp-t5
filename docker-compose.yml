@@ -1,0 +1,54 @@
+version: "3"
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - wordpress
+      - phpmyadmin
+    networks:
+      - tugas5
+
+  wordpress:
+    image: wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: ${/cloud-wp/wp-host}
+      WORDPRESS_DB_USER: ${/cloud-wp/username}
+      WORDPRESS_DB_PASSWORD: ${/cloud-wp/password}
+      WORDPRESS_DB_NAME: ${/cloud-wp/db-name}
+    networks:
+      - tugas5
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${/cloud/root-pass}
+      MYSQL_DATABASE: ${/cloud/database}
+      MYSQL_USER: ${/cloud/username}
+      MYSQL_PASSWORD: ${/cloud/password}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - tugas5
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+    networks:
+      - tugas5
+
+networks:
+  tugas5:
+
+volumes:
+  db_data:
