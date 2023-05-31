@@ -27,10 +27,10 @@ services:
     image: mariadb
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${/cloud/root-pass}
-      MYSQL_DATABASE: ${/cloud/database}
-      MYSQL_USER: ${/cloud/username}
-      MYSQL_PASSWORD: ${/cloud/password}
+      MYSQL_ROOT_PASSWORD: ${/cloud-db/root-pass}
+      MYSQL_DATABASE: ${/cloud-db/database}
+      MYSQL_USER: ${/cloud-db/username}
+      MYSQL_PASSWORD: ${/cloud-db/password}
     volumes:
       - db_data:/var/lib/mysql
     networks:
