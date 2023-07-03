@@ -1,0 +1,5 @@
+# Ignore letsgoo.sh script
+letsgoo.sh
+
+# Ignore .env file
+.env
