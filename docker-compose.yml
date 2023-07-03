@@ -39,7 +39,7 @@ services:
     ports:
       - 8081:80
     environment:
-      - PMA_HOST=db
+      - PMA_HOST=mariadb
       - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
     depends_on:
       - mariadb
